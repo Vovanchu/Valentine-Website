@@ -1,125 +1,104 @@
 <!DOCTYPE html>
 <html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Для моєї коханої</title>
-    <style>
-        body {
-            background-color: #ffccdd;
-            text-align: center;
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            overflow: hidden;
-        }
-        .heart-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            pointer-events: none;
-        }
-        .heart {
-            position: absolute;
-            color: red;
-            font-size: 30px;
-            animation: fall linear infinite;
-        }
-        @keyframes fall {
-            0% { transform: translateY(-10%); opacity: 1; }
-            100% { transform: translateY(100vh); opacity: 0; }
-        }
-        .message {
-            font-size: 24px;
-            color: #d63384;
-            margin-top: 20px;
-        }
-        .container {
-            margin-top: 50px;
-            padding: 20px;
-        }
-        .slider {
-            position: relative;
-            margin: 50px auto;
-            width: 90%;
-            max-width: 300px;
-            height: 200px;
-            overflow: hidden;
-            border-radius: 20px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        .slides {
-            display: flex;
-            width: 300%;
-            height: 100%;
-            animation: slide 20s infinite;
-        }
-        .slides img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        @keyframes slide {
-            0% { transform: translateX(0); }
-            33% { transform: translateX(-100%); }
-            66% { transform: translateX(-200%); }
-            100% { transform: translateX(0); }
-        }
-        @media (max-width: 768px) {
-            .message {
-                font-size: 18px;
-            }
-            .slider {
-                width: 80%;
-                height: 150px;
-            }
-        }
-        @media (max-width: 480px) {
-            .message {
-                font-size: 16px;
-            }
-            .slider {
-                width: 90%;
-                height: 120px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="heart-container"></div>
-    <div class="container">
+
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="first_window">
+      <h1 class="question">Are you ready to be my Valentine?</h1>
+      <div class="answer">
+        <h2 class="answer_yes" id="Yes">Yes</h2>
+        <h2 class="answer_no" id="No">No</h2>
+      </div>
+    </div>
+
+    <div class="wrapper" style="display: none;">
+      <div class="heart-container"></div>
+      <div class="container">
         <p class="message">Моє серце належить тобі! 💖</p>
         <p class="message">Ти найдорожча людина у моєму житті! 😘</p>
-    </div>
-    <div class="slider">
+      </div>
+      <div class="slider">
         <div class="slides">
-          <img src="photo1.jpg" alt="Фото 1">
-          <img src="photo2.jpg" alt="Фото 2">
-          <img src="photo3.jpg" alt="Фото 3">
-          <img src="photo4.jpg" alt="Фото 4">
-          <img src="photo5.jpg" alt="Фото 5">
-          <img src="photo6.jpg" alt="Фото 6">
-          <img src="photo7.jpg" alt="Фото 7">
-          <img src="photo8.jpg" alt="Фото 8">
+          <img src="photo1.jpg" alt="Фото 1" />
+          <img src="photo2.jpg" alt="Фото 2" />
+          <img src="photo3.jpg" alt="Фото 3" />
+          <img src="photo4.jpg" alt="Фото 4" />
+          <img src="photo5.jpg" alt="Фото 5" />
+          <img src="photo6.jpg" alt="Фото 6" />
+          <img src="photo7.jpg" alt="Фото 7" />
+          <img src="photo8.jpg" alt="Фото 8" />
         </div>
+      </div>
     </div>
+
     <script>
-        function createHeart() {
-            const heart = document.createElement("div");
-            heart.classList.add("heart");
-            heart.innerHTML = "❤️";
-            document.querySelector(".heart-container").appendChild(heart);
-            
-            heart.style.left = Math.random() * 100 + "vw";
-            heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
-            heart.style.fontSize = (Math.random() * 20 + 10) + "px";
-            heart.style.top = "-10%";
-            
-            setTimeout(() => {
-                heart.remove();
-            }, 5000);
-        }
-        setInterval(createHeart, 200);
+      document.addEventListener("DOMContentLoaded", function () {
+        const yesButton = document.getElementById("Yes");
+        const noButton = document.getElementById("No");
+
+        // Подія для кнопки "Yes"
+        yesButton.addEventListener("click", function () {
+          let wrapper = document.querySelector(".wrapper");
+          let window = document.querySelector(".first_window");
+          wrapper.style.display = "block";
+          window.style.display = "none";
+        });
+
+        yesButton.addEventListener("touchstart", function () {
+          let wrapper = document.querySelector(".wrapper");
+          let window = document.querySelector(".first_window");
+          wrapper.style.display = "block";
+          window.style.display = "none";
+        });
+
+        // Подія для кнопки "No"
+        noButton.addEventListener("click", function () {
+          let funnyTexts = [
+            "Подумай ще раз!",
+            "Справді? 😢",
+            "А може таки ТАК?",
+            "Не треба так...",
+            "Вірю в тебе! ❤️",
+          ];
+          this.textContent =
+            funnyTexts[Math.floor(Math.random() * funnyTexts.length)];
+        });
+
+        noButton.addEventListener("touchstart", function () {
+          let funnyTexts = [
+            "Подумай ще раз!",
+            "Справді? 😢",
+            "А може таки ТАК?",
+            "Не треба так...",
+            "Вірю в тебе! ❤️",
+          ];
+          this.textContent =
+            funnyTexts[Math.floor(Math.random() * funnyTexts.length)];
+        });
+      });
+
+      function createHeart() {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+        document.querySelector(".heart-container").appendChild(heart);
+
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+        heart.style.fontSize = Math.random() * 20 + 10 + "px";
+        heart.style.top = "-10%";
+
+        setTimeout(() => {
+          heart.remove();
+        }, 5000);
+      }
+
+      setInterval(createHeart, 200);
     </script>
-</body>
+  </body>
 </html>
